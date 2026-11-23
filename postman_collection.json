@@ -1,0 +1,26 @@
+{
+  "info": { "name": "Bank Account Service", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "variable": [ { "key": "base", "value": "http://localhost:8081" }, { "key": "id", "value": "" } ],
+  "item": [
+    { "name": "REST - Lister les comptes", "request": { "method": "GET", "url": "{{base}}/api/comptes" } },
+    { "name": "REST - Créer un compte",
+      "event": [ { "listen": "test", "script": { "exec": [ "pm.collectionVariables.set('id', pm.response.json().id);" ] } } ],
+      "request": { "method": "POST", "url": "{{base}}/api/comptes",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"solde\": 9000,\n  \"devise\": \"MAD\",\n  \"type\": \"EPARGNE\",\n  \"clientId\": 1\n}" } } },
+    { "name": "REST - Consulter un compte", "request": { "method": "GET", "url": "{{base}}/api/comptes/{{id}}" } },
+    { "name": "REST - Modifier un compte",
+      "request": { "method": "PUT", "url": "{{base}}/api/comptes/{{id}}",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"solde\": 12000\n}" } } },
+    { "name": "REST - Supprimer un compte", "request": { "method": "DELETE", "url": "{{base}}/api/comptes/{{id}}" } },
+    { "name": "Data REST - Comptes (projection p1)", "request": { "method": "GET", "url": "{{base}}/data/comptes?projection=p1" } },
+    { "name": "Data REST - Comptes épargne (projection complet)", "request": { "method": "GET", "url": "{{base}}/data/comptes/search/byType?t=EPARGNE&projection=complet" } },
+    { "name": "GraphQL - Clients et comptes",
+      "request": { "method": "POST", "url": "{{base}}/graphql",
+        "body": { "mode": "graphql", "graphql": { "query": "{\n  clients { id nom comptes { id solde devise type } }\n}" } } } },
+    { "name": "GraphQL - Ajouter un compte",
+      "request": { "method": "POST", "url": "{{base}}/graphql",
+        "body": { "mode": "graphql", "graphql": { "query": "mutation {\n  addCompte(compte: {solde: 500, devise: \"EUR\", type: COURANT, clientId: 2}) { id solde nomClient }\n}" } } } }
+  ]
+}

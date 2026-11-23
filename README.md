@@ -37,6 +37,33 @@ Port : **8081**
 | 11. GraphiQL | http://localhost:8081/graphiql (endpoint : `POST /graphql`) |
 | Console H2 | http://localhost:8081/h2-console (JDBC URL : `jdbc:h2:mem:comptes-db`, user `sa`, sans mot de passe) |
 
+## Captures d'écran
+
+### API REST : `GET /api/comptes`
+![API REST](docs/screenshots/rest-api.png)
+
+### Documentation Swagger UI
+![Swagger UI](docs/screenshots/swagger-ui.png)
+
+Exécution de `GET /api/comptes` depuis Swagger UI :
+
+![Swagger : exécution](docs/screenshots/swagger-execute.png)
+
+### Spring Data REST : projection `p1` (`id`, `solde`, `type`)
+![Spring Data REST projection p1](docs/screenshots/data-rest-projection.png)
+
+### Spring Data REST : recherche `byType` + projection `complet`
+![Spring Data REST recherche](docs/screenshots/data-rest-search.png)
+
+### GraphQL : requête `clients` avec leurs comptes
+![GraphiQL requête](docs/screenshots/graphiql-query.png)
+
+### GraphQL : mutation `addCompte`
+![GraphiQL mutation](docs/screenshots/graphiql-mutation.png)
+
+### Console H2 : table `COMPTE`
+![Console H2](docs/screenshots/h2-console.png)
+
 ## Tests
 
 ```bash
